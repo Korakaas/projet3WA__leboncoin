@@ -32,6 +32,7 @@ class AnnonceController extends AbstractController
     #[Route('/user/{user}/annonces/', name: 'app_annonces_user')]
     public function userAnnonces(User $user, AnnonceRepository $annonceRepository): Response
     {
+        $this->denyAccessUnlessGranted('view', $user);
         $annonces = $annonceRepository->findBy(['user'=>$user->getId()]);
         return $this->render('annonce/userAnnonces.html.twig', [
             'annonces' => $annonces,
@@ -43,6 +44,7 @@ class AnnonceController extends AbstractController
     #[Route('/user/{user}/annonce/new', name:'app_annonce_new')]
     public function new(User $user, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('view', $user);
         $annonce = new Annonce;
         $annonceForm = $this->createForm(AnnonceType::class, $annonce);
         $annonce->setUser($user);

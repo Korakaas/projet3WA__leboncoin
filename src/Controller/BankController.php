@@ -24,6 +24,7 @@ class BankController extends AbstractController
     #[Route('/user/{user}/bank', name: 'app_bank')]
     public function index(User $user, BankRepository $bankRepository): Response
     {
+        $this->denyAccessUnlessGranted('view', $user);
         $bank = $bankRepository->findOneBy(['user' => $user->getId()]);
         return $this->render('bank/index.html.twig', [
             'bank' => $bank,
@@ -34,6 +35,7 @@ class BankController extends AbstractController
     #[Route('/user/{user}/bank/{bank}/update', name: 'app_bank_update')]
     public function update(User $user, Bank $bank, Request $request): Response
     {    
+        $this->denyAccessUnlessGranted('view', $user);
         $bankForm = $this->createForm(BankType::class, $bank);
         $bank->setUser($user);
         $bankForm->handleRequest($request);

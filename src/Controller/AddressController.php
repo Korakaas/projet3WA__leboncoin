@@ -27,6 +27,7 @@ class AddressController extends AbstractController
     #[Route('/user/{user}/address', name:'app_address', methods: ['GET'])]
     public function index(User $user, AddressRepository $addressRepository): Response
     {
+        $this->denyAccessUnlessGranted('view', $user);
         $addresses = $addressRepository->findBy(['user' => $user->getId()]);
         return $this->render('address/index.html.twig', [
             'addresses' => $addresses,
@@ -37,6 +38,7 @@ class AddressController extends AbstractController
     #[Route('/user/{user}/address/new', name: 'app_address_new', methods: ['GET', 'POST'])]
     public function newAddress(User $user, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('view', $user);
         $address = new Address();       
         $addressForm = $this->createForm(AddressType::class, $address);
         $address->setUser($user);
@@ -53,7 +55,7 @@ class AddressController extends AbstractController
 
     #[Route('/user/{user}/address/{address}/update', name: 'app_address_update', methods: ['GET', 'POST'])]
     public function updateAddress(Address $address, User $user, Request $request): Response
-    {   
+    {   $this->denyAccessUnlessGranted('view', $user);
         $addressForm = $this->createForm(AddressType::class, $address);
         $addressForm->handleRequest($request);
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
@@ -68,7 +70,7 @@ class AddressController extends AbstractController
 
     #[Route('/user/{user}/address/{address}/delete', name: 'app_address_delete', methods: ['GET', 'DELETE'])]
     public function deleteAddress(Address $address, User $user, Request $request): Response
-    {   
+    {   $this->denyAccessUnlessGranted('view', $user);
         
             $this->em->remove($address);
             $this->em->flush();
