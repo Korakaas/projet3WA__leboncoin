@@ -44,7 +44,7 @@ class AddressController extends AbstractController
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
             $this->em->persist($address);
             $this->em->flush();
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute("app_address", array('user' => $user->getId()));
         }
         return $this->render('address/new.html.twig', [
             'addressForm' => $addressForm->createView(),
@@ -52,14 +52,14 @@ class AddressController extends AbstractController
     }
 
     #[Route('/user/{user}/address/{address}/update', name: 'app_address_update', methods: ['GET', 'POST'])]
-    public function updateAddress(Address $address, Request $request): Response
+    public function updateAddress(Address $address, User $user, Request $request): Response
     {   
         $addressForm = $this->createForm(AddressType::class, $address);
         $addressForm->handleRequest($request);
         if ($addressForm->isSubmitted() && $addressForm->isValid()) {
             $this->em->persist($address);
             $this->em->flush();
-            return $this->redirectToRoute('app_user');
+            return $this->redirectToRoute("app_address", array('user' => $user->getId()));
         }
         return $this->render('address/edit.html.twig', [
             'addressForm' => $addressForm->createView(),

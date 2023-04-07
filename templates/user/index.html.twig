@@ -11,6 +11,8 @@
 <div class="example-wrapper">
     <h1>Hello {{ user.pseudo }}! ✅</h1>
     <a href="{{path('app_address', {user: user.id})}}">Mes addresses</a>
+    <a href="{{path('app_bank', {user: user.id})}}">Consulter mon solde</a>
+    <a href="{{path('app_annonces_user', {user: user.id})}}">Mes annonces</a>
     <a href="{{path('app_logout')}}">Se déconnecter</a>
 </div>
 {% endblock %}
