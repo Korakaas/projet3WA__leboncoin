@@ -28,7 +28,7 @@ class Annonce
     #[ORM\Column]
     private ?bool $is_visible = null;
 
-    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    #[ORM\ManyToOne(inversedBy: 'annonces', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
