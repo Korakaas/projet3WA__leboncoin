@@ -36,10 +36,12 @@ class BankController extends AbstractController
     public function update(User $user, Bank $bank, Request $request): Response
     {    
         $this->denyAccessUnlessGranted('view', $user);
+        $currentAmount = $bank->getAmount();
         $bankForm = $this->createForm(BankType::class, $bank);
         $bank->setUser($user);
         $bankForm->handleRequest($request);
         if ($bankForm->isSubmitted() && $bankForm->isValid()) {
+            $bank->setAmount($currentAmount + $bankForm->get('montant')->getData());
             $this->em->persist($bank);
             $this->em->flush();
             return $this->redirectToRoute("app_bank", array('user' => $user->getId()));

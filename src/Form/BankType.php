@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Bank;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,7 +15,10 @@ class BankType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('amount', TextType::class )
+            ->add('amount', HiddenType::class )
+            ->add('montant', TextType::class, [
+                'mapped' => false
+            ] )
             ->add('Enregistrer', SubmitType::class)
         ;
     }
@@ -23,6 +27,7 @@ class BankType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Bank::class,
+            'allow_extra_fields' => true
         ]);
     }
 }
