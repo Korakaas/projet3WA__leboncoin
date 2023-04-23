@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Annonce;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,7 +20,10 @@ class AnnonceType extends AbstractType
             ->add('name', TextType::class)
             ->add('description',TextareaType::class )
             ->add('price', TextType::class)
-            ->add('is_visible', RadioType::class)
+            ->add('is_visible', CheckboxType::class, [
+                'label' => 'visible',
+                'label_attr' => ['class' => 'switch-custom'],
+            ])
             ->add('Creer', SubmitType::class)
         ;
     }
