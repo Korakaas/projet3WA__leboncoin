@@ -48,6 +48,8 @@ class BankController extends AbstractController
         }
         return $this->render('bank/edit.html.twig', [
             'bankForm' => $bankForm->createView(),
+            'user' => $user,
+
         ]);
     }
 }

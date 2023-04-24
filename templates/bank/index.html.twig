@@ -13,4 +13,6 @@
     <p>Votre solde s'élève à {{bank.amount}} euros</p>
     <a href="{{path('app_bank_update', {user: user.id, bank:bank.id})}}">Approvisionner mon solde</a>
 </div>
+<a href="{{path('app_user', {user: user.id})}}">Mon espace</a>
+
 {% endblock %}

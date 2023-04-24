@@ -12,4 +12,7 @@
     <h1>Modifier une addresse</h1>
     {{form(addressForm)}}
 </div>
+
+<a href="{{path('app_address', {user: user.id})}}">Mes adresses</a>
+<a href="{{path('app_user', {user: user.id})}}">Mon espace</a>
 {% endblock %}

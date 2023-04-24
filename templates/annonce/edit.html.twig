@@ -13,4 +13,7 @@
     <p>{{annonce.description}}</p>
     <p>{{annonce.price}} €</p>
 </div>
+
+<a href="{{path('app_annonces_user', {user: user.id})}}">Mes annonces</a>
+<a href="{{path('app_user', {user: user.id})}}">Mon espace</a>
 {% endblock %}

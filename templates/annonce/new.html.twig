@@ -12,4 +12,7 @@
     <h1>Créer une annonce</h1>
     {{form(annonceForm)}}
 </div>
+
+<a href="{{path('app_annonces_user', {user: user.id})}}">Mes annonces</a>
+<a href="{{path('app_user', {user: user.id})}}">Mon espace</a>
 {% endblock %}

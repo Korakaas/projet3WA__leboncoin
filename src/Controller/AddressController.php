@@ -50,6 +50,7 @@ class AddressController extends AbstractController
         }
         return $this->render('address/new.html.twig', [
             'addressForm' => $addressForm->createView(),
+            'user' =>$user
         ]);
     }
 
@@ -65,6 +66,8 @@ class AddressController extends AbstractController
         }
         return $this->render('address/edit.html.twig', [
             'addressForm' => $addressForm->createView(),
+            'user' =>$user
+
         ]);
     }
 

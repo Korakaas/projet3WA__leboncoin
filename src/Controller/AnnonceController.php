@@ -58,6 +58,7 @@ class AnnonceController extends AbstractController
         }
         return $this->render('annonce/new.html.twig', [
             'annonceForm' => $annonceForm,
+            'user'=>$user
         ]);
     }
 }

@@ -17,4 +17,6 @@
     {% endfor %}
         <a href="{{path('app_annonce_new', {user: user.id})}}">Créer une annonce</a>
 </div>
+
+<a href="{{path('app_user', {user: user.id})}}">Mon espace</a>
 {% endblock %}
